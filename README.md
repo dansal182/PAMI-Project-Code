@@ -1,2 +1,2 @@
 # PAMI-Project-Code
-This R script crates an Excel to simulate an e-commerce insurance product based on data from Mexico's central bank (Banxico). 
+This R script crates an Excel to simulate an e-commerce insurance product based on data from Mexico's central bank (Banxico). Most of the code's variables, functions and results are in Spanish because the project was submitted in Spanish. The code in here is intended to help future students at ITAM who need to see how the final results were acquired and/or how to implement some of it into future projects. The pdf file (in Spanish) includes the statistical models used in the project. The Excel file inlcudes the results the R code produces. 
