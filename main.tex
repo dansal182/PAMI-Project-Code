@@ -1,0 +1,415 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumerate} 
+\usepackage{graphicx} 
+\usepackage{fontspec}
+\usepackage{amsthm}
+\usepackage{smartdiagram}
+\usepackage[spanish,es-nodecimaldot]{babel}
+\usepackage{graphicx} 
+\usepackage{nopageno}
+\graphicspath{ {images/} }
+\usepackage{float}
+
+\title{Nota tec PAMI}
+\author{dsalnikovb }
+\date{November 2020}
+
+\begin{document}
+
+\section*{Bases Técnicas, Estadísticas y Financieras}
+\subsection*{Mercado Objetivo}
+Para efectos de este producto está contemplado el crecimiento del comercio electrónico y el fraude en transacciones digitales, junto con el número de tarjetahabientes de crédito y débito en la República Mexicana.
+Con base en los datos de Banco de México, el crecimiento en las transacciones digitales crece de forma considerable, la figura uno muestra el aumento en transacciones digitales del 2015 al 2020. De estas transacciones el $10\%$ de los reclamos por contracargo suelen tener una resolución no favorable, es decir que el tarjetahabiente no recibe un reembolso por el contracargo. 
+Banco de México reportó que por el momento el $40\%$ de los tarjetahabientes en México realiza compras en línea; sin embargo, este número está en constante crecimiento al igual que el número de compras, monto  y reclamos. 
+El mercado potencial son los 28,184,398 tarjetahabientes de crédito y 137,194,881 tarjetahabientes de débito actuales. Para efectos de las proyecciones se tomo una posición conservadora, es decir el mercado objetivo del producto es el $4\%$ del $10\%$ del $40\%$ de los tarjetahabientes de crédito con un crecimiento anual del $8\%$. Este número de clientes corresponde a los tarjetahabientes que realizan compras en línea y tuvieron una resolución no favorable después de realizar un reclamo por contracargo.
+\begin{table}[H]
+    \centering
+    \begin{tabular}{c|c|c}
+     Cartera Objetivo &  &  \\
+\hline
+Año	& $\#$ Polizas de Credito &	$\#$ Polizas de Debito \\
+\hline
+2021  &	45095	& 45095 \\
+2022	& 48703	& 48703 \\
+2023	& 52599	& 52599 \\
+2024	& 56807	& 56807 \\
+2025	& 61352	& 61352 \\
+2026	& 66260	& 66260 \\
+2027	& 71561	& 71561 \\
+2028	& 77286	& 77286 \\
+2029	& 83469	& 83469 \\
+2030	& 90147	& 90147 \\
+    \end{tabular}
+    \caption{Clientes proyectados}
+
+\end{table}
+Cabe resaltar que el mercado potencial es mucho mayor que el mercado objetivo.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\linewidth]{merc_crec_cred.png}
+    \caption{Mercado Potencial.}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\textwidth]{cart_crec_cred.png}
+    \caption{Cartera objetivo.}
+\end{figure}
+\newpage
+\subsection*{Nota Técnica}
+\subsubsection*{Características del Producto}
+\begin{itemize}
+    \item Seguro de crédito con limitación de $\$ 50,000$ pesos para compras con tarjetas de crédito y de $\$ 40,000$ para compras con tarjeta de débito. 
+    \item Póliza por cliente con un máximo de una tarjeta de crédito y una de débito por tarjetahbiente asegurado. 
+    \item Seguro exclusivo para tarjetas válidas emitidas por un banco que cuenta con convenio de la venta del seguro con la aseguradora. 
+    \item Solo válido para tarjetas emitidas por entidades financieras (bancos) con sede en la República Mexicana. 
+    \item Reclamo solo es válido después de una resolución no favorable al reportar el contracacargo al banco del tarjetahabiente. El asegurado debe esperar al menos 30 días naturales, no más de un año, después de realizar el reclamo ante su banco para empezar el proceso de reclamación con la aseguradora. 
+    \item Seguro con duración anual, pago de primas puede ser mensual o anual.
+    
+\end{itemize}
+\subsubsection*{Coberturas por daños de crédito (el valor económico de la compra)}
+\begin{itemize}
+    \item Daños por engaño (que el producto que recibe el tarjetahabiente no es el que estaba anunciado en la página del vendedor al momento de realizar la transacción).
+    \item Daños por transacciones que el tarjetahabiente no reconoce, es decir contracargos provenientes de transacciones que el tarjetahabiente no autorizó.
+    \item Daños por insatisfacción sustentada, es decir el producto o servicio que el tarjetahabiente recibe después de la transacción es de una calidad mucho menor a la que tiene en promedio el producto y/o servicio que el tarjetahabiente compró.
+    \item Todos los daños son exclusivos para transacciones de comercio electrónico, es decir no es posible reclamar contracargos que no hayan resultado de una transacción digital (en línea).
+
+\end{itemize}
+\newpage
+\subsection*{Procedimiento para el cálculo de las primas}
+Para el cálculo de las primas, se consideró la información de frecuencia y severidad en la páginas en línea de CONDUSEF y Banco de México, esta información es proporcionada por el Banco de México. 
+\subsubsection*{Supuestos} 
+
+El modelo específico es una versión del modelo de credibilidad lineal de Bülhmann. El modelo es:
+\begin{align*}
+    \mu(\theta) &= E( X_j | \theta) \\
+    \nu (\theta) &= Var(X_j | \theta) \\
+    \theta &:= \text{ Parámetro de riesgo.} \\
+    X_j & := \text{Variable aleatoria con la cual se modela la severidad o la frecuencia.}
+\end{align*}
+Para este modelo se utilizan las siguientes cantidades: 
+\begin{align*}
+    \mu &= E \big ( \mu(\theta) \big) \\
+    \nu &= E \big ( \nu(\theta) \big) \\
+    \sigma^2 &= Var \big ( \mu (\theta) \big ) \\
+    k &= \frac{\nu}{\sigma^2} \\
+    z &= \frac{1}{1 + \frac{k}{n} } \\
+    n & := \text{Número de integrantes del grupo.}
+\end{align*}
+Le grupo está definido por el tipo de producto financiero que el tarjetahabiente utiliza para realizar la transacción, es decir el grupo es tarjeta de crédito o tarjeta de débito u otro producto. \\
+La prima pura estimada (valor  esperado de la variable aleatoria) es: 
+\begin{equation*}
+    \hat{x} = z \overline{x} + (1 - z ) \mu.
+\end{equation*}
+\newpage
+\subsubsection*{ Frecuencia}
+Cada cobertura se modela por separado; además, cada cobertura es considerada independiente de las demás. Sea $Y$ la variable aleatoria que modela la el número de compras por cobertura. El modelo de este seguro supone lo siguiente: 
+\begin{align*}
+    X_j = Y | \lambda &\sim Poisson(\lambda) \\
+    \lambda &\sim Gamma(p_0, q_0) \\
+    p_0, q_0 &> 0 \enspace \text{
+     fijos (constantes conocidas)}.
+\end{align*}
+Con base en los supuestos empleados las cantidades pertinentes son: 
+\begin{align*}
+    \mu_y &= E \big ( \mu(\lambda) \big ) \\
+    = E \big ( E ( Y | \lambda ) \big ) 
+    &= E(\lambda)
+    = \frac{p_0}{ q _0 } . \\
+    \nu_ y &= E \big ( \nu(\lambda) \big ) \\
+    = E \big ( Var(  Y | \lambda) \big ) 
+    &= E (\lambda) 
+    = \frac{p_0}{ q _0 } . \\
+    \sigma^2_y = Var \big ( E ( Y| \lambda) \big ) 
+    &= Var( \lambda) 
+    = \frac{p_0}{q_0^2} . \\
+    k_y &= \frac{\nu_y}{\sigma^2_y} = \frac{\frac{p_0}{q_0}}
+    { \frac{p_0}{q_0^2} } = q_0 . \\
+    z_y &= \big ( 1 + \frac{q_0}{n} \big )^{-1}.  \\
+    \hat{y} &= z_y \overline{y} + (1 - z_y) \mu_y . 
+\end{align*}
+La cantidad $\overline{y}$ es la tasa  (promedio) de compras anuales esperadas en el promedio de las observaciones. En el caso de que una cobertura pertenezca a un grupo con una tasa esperada mucho mayor que la de otros grupos, la prima pura contiene un recargo igual a una desviación estándar de las observaciones: 
+\begin{equation*}
+    \hat{y}_{\text{af} } = \hat{y} + \sqrt{\frac{
+    \sum ( y - \overline{y} )^2 }{n -1}} .
+\end{equation*}
+Los grupos en este seguro son:
+\begin{itemize}
+    \item Crédito: $Y \sim Poisson(\lambda)$ con 
+    $\lambda \sim Gamma(p_0 = .0115, q_0 = 0.001)$ .
+    \item Débito: $Y \sim Poisson(\lambda)$ con 
+    $\lambda \sim Gamma(p_0 = 7, q_0 = 1)$. 
+\end{itemize}
+\newpage
+Una vez que es posible estimar el número de compras anuales del asegurado, con base en los datos de Banco de México, es posible calcular el número de siniestros esperados para cada tipo de tarjeta con respecto a las compras en línea. Las frecuencia de reclamaciones, es decir el porcentaje de compras en línea que resultan en un reclamo por contracargo por parte del tarjetahabiente del total de compras autorizadas son: 
+\begin{align*}
+    \hat{f}_{cred} &= \frac{\sum \textit{Siniestros crédito}}{ 
+    \sum \textit{Expuestos crédito}} \\ 
+    &= 0.02615657 \enspace ; \\
+    \hat{f}_{debt} &= \frac{\sum \textit{Siniestros débito}}{ 
+    \sum \textit{Expuestos débito}} \\ 
+    &= 0.01273027 \enspace .
+\end{align*}
+\subsubsection*{Severidad}
+Cada cobertura se modela por separado; además, cada cobertura es considerada independiente de las demás. Sea $X$ la variable aleatoria que modela la severidad por cobertura, es decir el monto de contracargo en promedio que tiene una reclamación. El modelo de este seguro supone lo siguiente: 
+\begin{align*}
+    X_j = X | \alpha &\sim Gamma(\alpha, \beta_0) \\
+    \alpha &\sim Gamma(a_0, b_0) \\
+    a_0, b_0, \beta_0 &> 0 \enspace \text{
+     fijas (constantes conocidas)}.
+\end{align*}
+Con base en los supuestos empleados, las cantidades pertinentes son: 
+\begin{align*}
+    \mu_x &= E \big ( \mu(\alpha) \big ) \\
+    = E \big ( E ( X | \alpha ) \big ) 
+    &= E \bigg ( \frac{\alpha}{ \beta_0 } \bigg)
+    = \frac{a_0}{ b _0 \beta_0 } . \\
+    \nu_ x &= E \big ( \nu(\alpha) \big ) \\
+    = E \big ( Var(  X | \alpha) \big ) 
+    &= E \bigg ( \frac{\alpha}{ \beta_0^2 } \bigg ) 
+    = \frac{a_0}{ b _0 } \frac{1}{\beta_0^2 } . \\
+    \sigma^2_x &= Var \big ( E ( X | \alpha) \big ) \\
+    = Var \bigg( \frac{\alpha}{ \beta_0 } \bigg ) 
+    &= \frac{a_0}{ b_0^2 \beta_0^2 } . \\
+    k_x &= \frac{\nu_x}{\sigma^2_x} = b_0 . \\
+    z_x &= \bigg ( 1 + \frac{b_0}{n} \bigg )^{-1}.  \\
+    \hat{x} &= z_x \overline{x} + (1 - z_x) \mu_x . 
+\end{align*}
+
+La cantidad $\overline{x}$ es el monto de un contracargo promedio de las observaciones que proporciona Banco de México. En el caso de una cobertura pertenezca a un grupo con una severidad esperada mucho mayor que la de otros grupos (compras en exceso de $\$ 35,000$ para crédito y $\$25, 000$ para débito) la prima pura contiene un recargo igual a una desviación estándar de las observaciones: 
+\begin{equation*}
+    \hat{x}_{\text{as} } = \hat{x} + \sqrt{\frac{
+    \sum ( x - \overline{x} )^2 }{n -1}} .
+\end{equation*}
+Los grupos en este seguro son:
+\begin{itemize}
+    \item Crédito: $X \sim Gamma(\alpha, \beta_0))$ con 
+    $\alpha \sim Gamma(a_0 = 1, b_0 = 0.1)$ .
+    \item Débito: $X \sim Gamma(\alpha, \beta_0))$ con 
+    $\alpha \sim Gamma(a_0 = 1, b_0 = 1.5)$ . 
+\end{itemize}
+\subsubsection*{Prima de Tarifa}
+La prima de riesgo para un tarjetahabiente con una tarjeta de crédito es: 
+\begin{equation*}
+    PP_{cred} = \textit{Prima Riesgo Crédito} =   \hat{x}  \hat{y} \hat{f}_{cred} 
+\end{equation*}
+De la misma forma para un trajetahabiente con una tarjeta de débito: 
+\begin{equation*}
+    PP_{debt} = \textit{Prima Riesgo Débito} =   \hat{x}  \hat{y} \hat{f}_{debt} 
+\end{equation*}
+
+\begin{equation*}
+    PT_j =  \frac{ PP_j (1 + GA_j ) }{ 
+    1 - C - B - GA - GP - U}
+\end{equation*}
+Porcentaje supuestos con base en los precios del seguro para tarjetahabientes de Santander-Zurich.
+\begin{itemize}
+    \item C: Comisión con porcentaje $8\%$ para los bancos que venden el seguro a sus tarjetahabientes. 
+    \item B: Bonos con porcentaje $3\%$ para los ejecutivos de cuenta de los bancos que realizan las ventas de las pólizas.
+    \item $GA_j$: Gastos de ajuste con porcentaje $6\%$, para cubrir la investigación de un siniestro y cerciorarse que el asegurado busco el reembolso por parte de su banco y el comercio antes de realizar el reclamo ante la aseguradora.
+    \item GA: Gastos de administración con porcentaje $9\%$
+    \item GP: Gastos propios del producto con porcentaje $1\%$
+    \item U: Utilidad sobre la prima de tarifa, con porcentaje $8\%$
+\end{itemize}
+Con estos porcentajes las primas de tarifa del producto son:
+\begin{figure}[H]
+    \includegraphics[width=1.0\linewidth, 
+    height=0.18\linewidth]{tab_prim.pdf}
+    \caption{Prima de tarifa y cobertura.}
+\end{figure}
+\newpage
+
+Las primas puras se calculan con base en un modelo de credibilidad lineal Bayesiana que incorpora un parámetro de riesgo a cada cobertura. esto es para considerar que la gente que busca el seguro suelen comprar más que la persona promedio en línea.
+\subsection*{Reserva}
+Para la determinación de la reserva se tomó una distribución de las pólizas de manera trimestral con los porcentajes asignados con base en la venta de transacciones en línea en México en el año 2018, 2019 y 2020. 
+El modelo supone que las pólizas fueron suscritas de manera uniforme a lo largo de cada trimestre (es decir los siniestros ocurren de forma uniforme en el año y a través de los asegurados), por lo que tenemos el porcentaje que se devengan las
+2 pólizas por semestre a lo largo del año de suscripción y el año siguiente. Para el cálculo de la reserva debemos de tomar en cuenta los incrementos de reserva del año en curso y la reserva del año.
+La reserva se calcula de forma anual tomando en cuenta el porcentaje que se devenga dependiendo del año en que se suscribió la póliza conforme al porcentaje de suscripciones en cada trimestre del año. Así pues, la proyección del seguro a 10 años está resumida en las tablas siguientes.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\linewidth, 
+    height=0.5\linewidth]{reserva.pdf}
+    \caption{Resumen de la reserva del seguro.}
+\end{figure}
+\newpage
+\subsection*{Reserva Riesgos en Curso}
+Antes de pasar al cálculo de la reserva se tomaron en cuenta algunos supuestos.\\
+Supuestos:\\
+Se toma una distribución de las pólizas de manera trimestral con los porcentajes asignados con base en las transacciones de comercio electrónico en México en los años 2018, 2019 y 2020:
+%%fugura trimestes
+Los trimestres están comprendidos de la siguiente manera: 
+\begin{table}[H]
+    \centering
+    \begin{tabular}{c|c}
+        TRIM 1 & Enero, febrero, marzo. \\
+        TRIM 2 & Abril, mayo, junio. \\
+        TRIM 3 & Julio, agosto, septiembre. \\
+        TRIM 4 & Octubre, noviembre, diciembre. \\
+    \end{tabular}
+    \caption{Trimestres del año para este producto.}
+\end{table}
+
+El producto asume que las pólizas fueron suscritas de manera uniforme a lo largo de cada trimestre, por lo que tenemos el porcentaje que se devengan las pólizas por semestre a lo largo del año de suscripción y el año siguiente:
+\begin{table}[H]
+ \resizebox{0.8\textwidth}{!}{\begin{minipage}{\textwidth}
+    \begin{tabular}{c|ccccc}
+         Trimestre
+& Prima Acumulada
+ & Año Suusc.
+& Año Sig.
+& Acumulado Susc.
+& Acumulado Sig. \\
+1
+& 22 $\%$
+& 88$\%$
+
+& 13$\%$
+
+& 19$\%$
+
+& 3$\%$
+ \\
+2
+& 25$\%$
+
+& 63$\%$
+
+& 38$\%$
+
+& 16$\%$
+
+& 9$\%$
+ \\
+3
+& 25$\%$
+
+& 38$\%$
+
+& 63$\%$
+
+& 9$\%$
+
+& 16$\%$
+ \\
+4
+& 28$\%$
+
+& 13$\%$
+
+& 88$\%$
+
+& 4$\%$
+
+& 25$\%$
+ \\
+
+    \end{tabular}
+    \end{minipage}}
+    \caption{Porcentajes con los cuales es devengada la prima.}
+\end{table}
+En el año de suscripción está devengado el $47.40\%$ de la primas y en el año siguiente el $52.60\%$ restante. 
+
+El cálculo del incremento en la reserva toma en cuenta la reserva del año en curso y el incremento de las nuevas primas. La reserva inicial es $V_0$ y esta es para $t \in \{1, \cdots, 9\}$. Así pues:
+\begin{equation*}
+    V_{t+1} = V_t + \Delta \textit{Reserva}_{t+1}
+\end{equation*}
+El incremento en las reservas es calculado como la suma del incremento en reservas del año en curso y el decremento de la reserva por la parte de las obligaciones del año pasado que se devengan este año.
+\begin{align*}
+    \Delta \textit{Reserva}_{t+1} &= \Delta \textit{Reserva}_{t+1,1 } + 
+    \Delta \textit{Reserva}_{t+1, 2} \\
+    \Delta \textit{Reserva}_{t,1} &= (\textit{Prima} - CA) \cdot
+    \% \textit{Póliza año  } t+1 \textit{devengado a año t} \\
+      \Delta \textit{Reserva}_{t,2} &= - (\textit{Prima} - CA) \cdot
+    \% \textit{Póliza año  } t \textit{  devengado a año t +1}
+\end{align*}
+Para calcular la prima devengada para el año en curso, basta con calcular la diferencia entre las primas y el incremento en reservas:
+\begin{equation*}
+    \textit{Prima devengada} = \textit{Prima} - \Delta \textit{Reserva}
+\end{equation*}
+La reserva se calcula de forma anual respetando el porcentaje que se devenga dependiendo del año en que se suscribió la póliza conforme al porcentaje de suscripciones en cada trimestre del año.
+La prima devengada se invierte en bonos con tasa libre de riesgo (7$\%$) que gana intereses mensualmente y suponiendo que los siniestros se distribuyen uniforme a lo largo de los trimestres, calculamos la distribución acumulada de los intereses que genera la reserva a lo largo de un año. De acuerdo con nuestro supuesto de trimestres, tenemos:
+\begin{table}[H]
+    \resizebox{0.6\textwidth}{!}{\begin{minipage}{\textwidth}
+    \begin{tabular}{ccccc}
+       Meses Prima Unif &	Porcentaje Ajustado Acumulado	& Porcentaje Prima	Porcentaje & Acumulado PF	Porcentaje & Acumulado PF \\
+    \hline 
+    0.5	& 0.076923077	& 0 & 	0	& 0 \\
+    1.5	& 0.224358974	& 0.215218684	& 0.048286243	& 0.048286243 \\
+    2.5	& 0.358974359	& 0	& 0	& 0 \\
+    3.5	& 0.480769231	& 0	& 0	& 0 \\
+    4.5	& 0.58974359	& 0.249869803	& 0.147359115	& 0.147359115 \\
+    5.5	& 0.685897436	& 0	& 0	& 0 \\
+    6.5	& 0.769230769	& 0	& 0	& 0 \\
+    7.5	& 0.83974359	& 0.250638167	& 0.210471794	& 0.210471794 \\
+    8.5	& 0.897435897	& 0	& 0	& 0 \\
+    9.5	& 0.942307692	& 0	& 0	& 0 \\
+    10.5	& 0.974358974	& 0.284273346	& 0.276984286	& 0.276984286 \\
+    11.5	& 0.993589744	& 0	& 0	& 0 \\
+    \end{tabular}
+    \end{minipage}}
+    \caption{Producto financiero a lo largo del año.}
+\end{table}
+Una vez teniendo el porcentaje que se acumula en el 1er año por las primas ya devengadas, utilizamos la fórmula de interpolación lineal para calcular los productos financieros.
+\begin{equation*}
+    f(x) = f(x_0)+ \frac{f(x_1) - f(x_0)}{x_1 - x_0} (x - x_0)
+\end{equation*}
+\newpage
+\subsection*{Solvencia}
+
+El requerimiento de capital de solvencia (RCS) para nuestro seguro es calculado de la siguiente manera: $RCS = RC_{RT} + RC_{RF} + RC_{RO}$. Cada uno se calcula de la siguiente manera:
+\begin{align*}
+    RC_{RT} &= VaR_{99.5} \textit{;         Riesgo técnico} \\
+    RC_{RF} &=  0 \textit{;         Riesgo financiero} \\
+    RC_{RO} &= 15\% \textit{Primas de Riesgo;} 
+    \textit{              Riesgo Operativo} 
+\end{align*}
+Las pérdidas ocurren cuando la siniestralidad (obligaciones de la aseguradora) son mayores a las primas de riesgo de la aseguradora, es decir las obligaciones son mayores a la siniestralidad esperada. La pérdida por cobertura es una suma aleatoria: 
+\begin{align*}
+    Y_i &\sim Poisson(\lambda) \\
+    X_j &\sim Gamma(a_0, \beta_0) \\
+    \theta_j &\sim Bernoulli(\hat{f}_{cred/debt}) \\
+    L_i &= \sum\limits_{j= 1}^{Y_i} X_j \theta_j
+\end{align*}
+Donde: 
+\begin{align*}
+    \frac{a_{cred}}{\beta_{cred} } &= \frac{1}{n} \sum\limits_{i=1}^{n}
+    x_{i_{cred}} \\
+    \frac{a_{debt}}{\beta_{debt} } &= \frac{1}{n} \sum\limits_{i=1}^{n}
+    x_{i_{debt}} \\
+    \lambda_{cred} &= \frac{1}{n} \sum\limits_{i=1}^{n}
+    y_{i_{cred}} \\
+     \lambda_{debt} &= \frac{1}{n} \sum\limits_{i=1}^{n}
+    y_{i_{debt}}
+\end{align*}
+La obligación total es: 
+\begin{equation*}
+    L = \sum\limits_{i=1}^{n} L_i
+\end{equation*}
+Al suponer que las coberturas, frecuencia, severidad y número de compras con independientes y restar las primas de riesgo de las obligaciones esperadas del seguro, entonces la variable aleatoria $L$ es la pérdida del producto. 
+Un cero en esta variable indica que las siniestralidad observada fue igual a la esperada. La línea roja representa este escenario para los 10 años. El $RC_{RT}$ de cada año es el percentil $99.5\%$ - media$L$. 
+\begin{equation*}
+    RC_{TC} = VaR_{99.5} - E(L)
+\end{equation*}
+Al ser una suma de variables aleatorias independientes con varianza finita, la variable aleatoria de cada año fue simulada 10,000 veces con base en el teorema del límite central.
+\begin{equation*}
+    L \simeq N(E(L), Var(L)).
+\end{equation*}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\textwidth]{cuad_rcs.pdf}
+    \caption{RCS calculado para los 10 años.}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\textwidth]{rcs_graf.pdf}
+    \caption{Gráficas de RCS.}
+\end{figure}
+\newpage
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.0\textwidth]{hist_L.pdf}
+    \caption{Histogramas de L.}
+\end{figure}
+
+\end{document}
