@@ -1,3 +1,4 @@
+##Required packages and the directory I used to store the data
 setwd("/Users/danielsalnikov/Desktop/actuarial_science/PAMI_proyecto")
 require(dplyr)
 require(purrr)
